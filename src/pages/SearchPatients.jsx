@@ -6,10 +6,11 @@ const SearchPatients = () => {
   const [bookedDays, setBookedDays] = useState({});
   const [selectedDoctor, setSelectedDoctor] = useState('');
   
-  const doctors =  ['Dr. Mina James','Dr. Ben Hyvard','Dr. Hennry ofss','Dr. Albert Robin','Dr. Frank Starr','Dr. David Starr','Dr. Marry Tagg','Dr. Elli Oniel','Dr. Hannah Pertain','Dr. Anni Arton']
+  const doctors =  ['Dr. Mina James','Dr. Ben Hyvard','Dr. Hennry ofss','Dr. Albert Robin','Dr. Frank Starr',
+                    'Dr. David Starr','Dr. Marry Tagg','Dr. Elli Oniel','Dr. Hannah Pertain','Dr. Anni Arton']
     
 
-  const handleCancelAppointment = (appointmentToCancel, selectedDay) => {
+    const handleCancelAppointment = (appointmentToCancel, selectedDay) => {
 
           const confirmed = window.confirm("Are you sure you want to cancel this appointment?");
           if (!confirmed) return;
@@ -47,31 +48,34 @@ const SearchPatients = () => {
                   Object.keys(dayBookings).forEach((dayKey) => {
                     const bookingsArray = dayBookings[dayKey];
 
-            if (Array.isArray(bookingsArray)) { 
+                    if (Array.isArray(bookingsArray)) { 
 
-               bookingsArray.forEach(slot =>{
-               if (slot.patient && 
-                (slot.patient.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                 slot.patient.familyName.toLowerCase().includes(searchQuery.toLowerCase())) 
-               ){
-                results.push({
-                  doctor,
-                  date: `${day}/${month}/${year}`,
-                  slot,
+                      bookingsArray.forEach(slot =>{
+                        if (slot.patient && 
+                          (slot.patient.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          slot.patient.familyName.toLowerCase().includes(searchQuery.toLowerCase())) 
+                        ){
+                          results.push({
+                            doctor,
+                            date: `${day}/${month}/${year}`,
+                            slot,
+                          });
+                          }
+                      });
+                    }
+
+                  });
                 });
-              }
-            });
-          }
-
-        });
-      });
-    })
-  })
-})
+              })
+            })
+          })
  
-    setSearchResults(results);
+          setSearchResults(results);
         }
-  return (
+      }
+     }
+     
+    return (
     <div className="p-4">
       <input
         type="text"
@@ -109,8 +113,7 @@ const SearchPatients = () => {
       )}
     </div>
   );
-};
+
   
-  }
 }
 export default SearchPatients;
