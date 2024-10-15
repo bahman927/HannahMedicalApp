@@ -1,0 +1,39 @@
+.timeslot-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-container {
+  position: absolute;
+  top: -5px; /* Adjust the position */
+  left: 100%; /* Tooltip appears to the right of the button */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 14px;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Position the arrow at the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent; /* Arrow pointing downward */
+}
+
+.timeslot-container:hover .tooltip-container {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-text {
+  font-size: 14px;
+}
