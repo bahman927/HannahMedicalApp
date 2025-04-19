@@ -48,7 +48,7 @@ const Appointment = () => {
               </div>
              
             </div>
-            <Calendar docName={docInfo.name}/>
+            <Calendar docName={docInfo.name} docId={docId}/>
           </div>
         )
       

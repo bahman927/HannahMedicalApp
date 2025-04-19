@@ -12,15 +12,11 @@ const Logout = () => {
         method: "POST",
         credentials: "include", // Include cookies
       });
-
       const data = await response.json();
       console.log("Logout Response:", data);
-
-      // Clear user data from context
       setName(null);
       setDrAppointment({});
-
-      // Redirect to login
+      setIsLoggedIn(false)
       navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
@@ -33,5 +29,4 @@ const Logout = () => {
     </button>
   );
 };
-
 export default Logout;

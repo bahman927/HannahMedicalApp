@@ -1,14 +1,17 @@
 
 // client/src/components/SignUp.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {useNavigate} from "react-router-dom"
+import { AuthContext } from '../context/AuthContext';
  
 export default function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [state, setState] = useState('Sign Up')
-   const navigate = useNavigate()
+  const navigate = useNavigate()
+  const {showToast} = useContext(AuthContext)
+   
   async function handleSignUp(e) {
     e.preventDefault() 
    try { 
@@ -22,10 +25,10 @@ export default function SignUp() {
     const data = await response.json(); // Convert response to JSON
 
     if (response.ok) {
-      alert(data.message)
+      showToast(data.message, "success")
       navigate("/login")
     } else {
-      alert(`Error: ${data.message || "Something went wrong signing up"}`);
+      showToast(data.message || "Something went wrong signing up"())
   }
    } catch(err) {
     console.error('error message = ', err.message);

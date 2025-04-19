@@ -64,7 +64,7 @@ export const doctors = [
     }         
   },
   {_id:'doc4',
-    name: 'Dr. Albert Robin',
+    name: 'Dr. Hellen Robin',
     image: "/images/dr4.jpg",
     speciality:'Pediatrician',
     degree: 'MBBS',
@@ -144,6 +144,19 @@ export const doctors = [
   {_id:'doc10',
     name: 'Dr. Anni Arton',
     image: "/images/dr10.jpg",
+    speciality:'General Physician',
+    degree: 'MBBS',
+    experience:'5 years',
+    about: 'Dr. Ben has Strong commitment to delivering',
+    fees:50,
+    address: {
+      line1: '25th  cross, Richmond',
+      line2: 'parkeircle, Ring Road, London'
+    }         
+  },
+  {_id:'doc11',
+    name: 'Dr. Paria Allson',
+    image: "/images/dr11.jpg",
     speciality:'General Physician',
     degree: 'MBBS',
     experience:'5 years',

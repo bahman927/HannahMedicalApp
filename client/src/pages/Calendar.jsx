@@ -1,16 +1,14 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { useNavigate} from "react-router-dom"
+import { useNavigate}  from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import  '../calendar.css'
-
 
 const getDaysInMonth = (month, year) => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-const Calendar = (props) => {
-  let {name} = useContext(AuthContext)
-  const navigate = useNavigate()
+const Calendar = (props) => { 
+  //const navigate = useNavigate()
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [selectedDoctor, setSelectedDoctor] = useState(props.docName)
@@ -19,13 +17,11 @@ const Calendar = (props) => {
   const [patientInfo, setPatientInfo] = useState({ name: '', familyName: '' });
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [submitted, setSubmitted]= useState(true)
-  
   const daysInMonth = getDaysInMonth(currentMonth, currentYear);
-  // Reference to the patient name input
   const patientInputRef = useRef(null);
   const patientInputRef2 = useRef(null);
   const slotInfoRef = useRef(null)
-  // console.log('name in Calendar = ', name)
+  const {name, userId, role, showToast, isLoggedIn} =  useContext(AuthContext)
   
   
 const handleDoctorChange = () => {
@@ -38,11 +34,13 @@ const today = new Date();
  
   // Generate time slots for appointments
 const generateTimeSlots = () => {
-  if (!name) {
-    alert("Please Login or sign up first ");
-    navigate("/");
+  if (!isLoggedIn) {
+    showToast("Please Login or sign up first ", "warning")
+   // navigate("/");
   }
-  
+  if (role === 'doctor'){
+    showToast(" Doctors Can not make Appointment ", "warning")
+  }
       const slots = [];
       let hour = 8;
       let minute = 0;
@@ -62,8 +60,6 @@ const generateTimeSlots = () => {
       }
   return slots;
 };
-
-// const timeSlotsRef = generateTimeSlots();
  
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -107,13 +103,7 @@ useEffect(() => {
     
    }, [bookedDays]);
 
-  //  useEffect(() => {
-  //   if (!name) {
-  //     alert("Please Login or sign up first ");
-  //     navigate("/");
-  //   }
-  // }, [name]);
-
+ 
 const handleDaySelection = (slot) => {
   
   setSelectedTimeSlot(slot)
@@ -142,30 +132,19 @@ const prevMonth = () => {
   };
 
 const handleTimeSlotBooking = (timeSlot) => {
-   
+        const  ddate = selectedDay +'-'+currentMonth +'-' + currentYear
+        const formattedDate = new Date(`${currentYear}-${currentMonth+1}-${selectedDay}`);
+        console.log('formattedDate : ', formattedDate)
         
         if (name) {
+          bookAppointment(userId, props.docId, formattedDate, selectedTimeSlot)
+          // setDocId(props.docId)
           patientInfo.name = name
+          showToast(`Booked at ${timeSlot} on ${months[currentMonth]}  ${selectedDay} for ${patientInfo.name}`, "success")
           
-          alert(`Booked ${timeSlot} on ${selectedDay} for ${patientInfo.name} `);
-          // setPatientInfo({ name: '', fam})
           setSubmitted(false)
         }
-       //  if (!patientInfo.name || !patientInfo.familyName){
-
-        //   if (!patientInfo.name && !patientInfo.familyName){
-        //      alert('Please enter patient name and patient family name.');
-        //     return patientInputRef.current.focus()
-        //   }
-
-        //   if (!patientInfo.name){
-        //      alert('Please enter patient name.');
-        //     return patientInputRef.current.focus
-        //   } else {
-        //     alert('Please enter patient family name.');
-        //     return patientInputRef2.current.focus()
-        //   }
-       //  }
+      
         
           setBookedDays((prev) => {
           const updatedDays = { ...prev };
@@ -189,12 +168,8 @@ const handleTimeSlotBooking = (timeSlot) => {
                 patient: { name: patientInfo.name },
               })
 
-            // alert(`Booked ${timeSlot} on ${selectedDay} for ${patientInfo.name}`);
-                  
-                // Clear input fields after booking
-               //  setPatientInfo({ name: '' })
                 setSubmitted(false)
-                //  console.log('updatedDays in 159 = ', updatedDays, ' selectedDoctor =', selectedDoctor)
+           
             return updatedDays;
                
             }
@@ -204,7 +179,6 @@ const handleTimeSlotBooking = (timeSlot) => {
     
 // -----------------------------------------------------
 const isTimeSlotBooked = (day, timeSlot) => {   
-  // console.log('bookedDays = ', bookedDays)
   
   if (!bookedDays){ 
     setBookedDays({})
@@ -226,8 +200,7 @@ const isTimeSlotBooked = (day, timeSlot) => {
     const dayBookings = bookedDays[selectedDoctor]?.[currentYear]?.[currentMonth]?.[day] ;
 
     if (!dayBookings) { return false}
-    // console.log( 'dayBookings = ', dayBookings)
-
+    
     return dayBookings?.find((booking) => booking.timeSlot === timeSlot);
   };
 
@@ -237,7 +210,7 @@ const isDayInPast = (day) => {
   };
 
 const isDayBooked = (day) => {
-    //  console.log('bookeddays in isDayBooked = ', bookedDays)
+    
     if (
       !bookedDays ||
       !bookedDays[selectedDoctor] ||
@@ -256,9 +229,6 @@ const isDayBooked = (day) => {
     setSubmitted(true)
     setSelectedDay(day);
     setSelectedTimeSlot(null); // Reset time slot on day selection
-    // setPatientInfo({ name: '', familyName: '' })
-    
-    
   };
 
   useEffect(() => {
@@ -275,8 +245,38 @@ const isDayBooked = (day) => {
     }));
   };
 
+  const bookAppointment = async (userId, doctorId, formattedDate, time) => {
+    const API_URL = "http://localhost:3000/api/appointments/book";
   
-
+    if (!userId || !doctorId || !formattedDate || !time) {
+      console.error("Missing required parameters:", { userId, doctorId, formattedDate, time });
+      return { error: "All fields are required to book an appointment." };
+    }
+  
+    try {
+     // console.log("calendar -> userId:", userId, "doctorId:", doctorId, "date:", formattedDate, "time:", time);
+     
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ userId, doctorId, formattedDate, time }),
+      });
+  
+      const result = await response.json(); // Store parsed response once
+  
+      if (!response.ok) {
+        console.error("API Error Response:", result);
+        return { error: result.message || "Failed to book appointment" };
+      }
+  
+      return result; // Return success response
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      return { error: "Failed to book appointment. Please try again later." };
+    }
+  };
+  
 return (
 
     <div className="flex flex-col items-center">
@@ -351,7 +351,6 @@ return (
                         onClick={() => handleDaySelection(slot) }        
                         disabled={!!booking}
                         
-                        // title={booking ? renderTooltip(booking) : ""}
                       >
                         {slot}
                       </button>
@@ -372,15 +371,7 @@ return (
           </div>
           )
         }
-          {/* Patient Info Input Form */}
-           {/* {selectedTimeSlot && submitted &&  (    
-                   <div className="mt-4 mb-4 ml-5 text-xl patient-info"> 
-                    <button className='mb-5' onClick={() => handleTimeSlotBooking(selectedTimeSlot)}>Confirm Booking
-                    </button>
-                   </div>
-                 
-                )} 
-            */}
+           
             <div>
              {selectedTimeSlot && submitted  && handleTimeSlotBooking(selectedTimeSlot)}
              </div>

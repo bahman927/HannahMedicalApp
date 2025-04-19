@@ -15,7 +15,7 @@ const Banner = () => {
               <p>with 100+ Trusted Doctors</p>
           </div>
          </div>
-         <button onClick={()=>{navigate('/login'); scrollTo(0,0)}} className='px-4 py-2 mt-8 text-sm text-gray-600 transition-all bg-gray-100 rounded-full sm:text-base hover:scale-105'>Create Account</button>
+         <button onClick={()=>{navigate('/signUp'); scrollTo(0,0)}} className='px-4 py-2 mt-8 text-sm text-gray-600 transition-all bg-gray-100 rounded-full sm:text-base hover:scale-105'>Create Account</button>
        </div>  
 
        {/*   Right side */}
