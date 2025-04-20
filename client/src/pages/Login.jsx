@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 const Login = () => {
    const [state, setState] = useState('Login')
@@ -11,7 +11,7 @@ const Login = () => {
    
    const submitHandler = async (e) => {
       e.preventDefault()
-         console.log('email = ', email, 'password = ', password, ' role : ', role)  
+     //    console.log('email = ', email, 'password = ', password, ' role : ', role)  
       if (!email || !password, !role) {
         showToast("Please enter email and password and role.", "warning")
         return;
@@ -46,7 +46,14 @@ const Login = () => {
             <option value="admin">Admin</option>
           </select>
         </div> 
-       <button type="submit" className="p-2 mt-4 text-lg font-medium text-white bg-blue-300 rounded">Submit</button>   
+       <button type="submit" className="p-2 mt-4 text-lg font-medium text-white bg-blue-300 rounded">Submit
+       </button> 
+       <p className="mt-2 text-sm">
+        Don’t have an account?{'  '}
+        <Link to="/signup" className="font-medium text-blue-600 hover:underline">
+          Sign up
+        </Link>
+      </p>
      </div>
     </form>
   )

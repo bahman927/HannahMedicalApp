@@ -1,7 +1,7 @@
 
 // client/src/components/SignUp.js
 import React, { useState, useContext } from 'react';
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import { AuthContext } from '../context/AuthContext';
  
 export default function SignUp() {
@@ -56,9 +56,15 @@ export default function SignUp() {
         <input  onChange={(e)=> setPassword(e.target.value)}  value={password} name='password' className='w-full p-2 mt-1 border rounded border-zinc-300' type="password" required />
       </div>    
       <button type="submit" className="p-2 mt-4 text-white bg-blue-300 rounded">Submit</button>
-       <button className='w-full py-2 text-black rounded-md white text-text-base' >
+      <p className="mt-2 text-sm">
+        Already have an account?{' '}
+        <Link to="/login" className="font-medium text-blue-600 hover:underline">
+          Login
+        </Link>
+      </p>
+       {/* <button className='w-full py-2 text-black rounded-md white text-text-base' >
           
-       </button>       
+       </button>        */}
      </div>
     </form>
   )
