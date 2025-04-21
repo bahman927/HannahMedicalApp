@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/userSchema.js";
 import Doctor from "../models/doctorSchema.js";
-import { normalizePath } from "vite";
+//import { normalizePath } from "vite";
 
 // Generate Access Token (Short-lived)
 const generateTokens = (userId, role) => {
