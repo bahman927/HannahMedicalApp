@@ -1,7 +1,7 @@
 import Doctor from "../models/doctorSchema.js";
 import User from '../models/userSchema.js';
 import bcrypt from 'bcrypt'
-import {useParams} from "react-router-dom"
+//import {useParams} from "react-router-dom"
 
 // Get all doctors
 export const getDoctors = async (req, res) => {
