@@ -1,1 +1,5 @@
-{"type":"module","scripts":{"start":"nodemon server.js"},"dependencies":{"bcrypt":"^5.1.1","bcryptjs":"^2.4.3","cookie-parser":"^1.4.7","cors":"^2.8.5","devenv":"^1.0.1","dotenv":"^16.4.7","jsonwebtoken":"^9.0.2","mongodb":"^6.13.0","mongoose":"^8.9.6","nodemon":"^3.1.9"}}
+{"name":"server",
+"type":"module",
+"main":"server.js",
+"scripts":{"start":"nodemon server.js"},"dev":"vite","build":"vite build","lint":"eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+"dependencies":{"bcrypt":"^5.1.1","bcryptjs":"^2.4.3","cookie-parser":"^1.4.7","cors":"^2.8.5","devenv":"^1.0.1","dotenv":"^16.4.7","jsonwebtoken":"^9.0.2","mongodb":"^6.13.0","mongoose":"^8.9.6","nodemon":"^3.1.9"}}
