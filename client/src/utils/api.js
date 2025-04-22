@@ -2,7 +2,8 @@ import axios from "axios"
  
 // Create an Axios instance
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: 'https://hannahmedicalapp.onrender.com/api',
+  //baseURL: "http://localhost:3000",
   withCredentials: true, // Ensures cookies (including refresh token) are sent with request
 });
  

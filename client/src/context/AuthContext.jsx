@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/check", {
+      const response = await fetch("https://hannahmedicalapp.onrender.com/api/auth/check", {
         method:"GET",
         credentials: "include", // Sends HttpOnly cookie
       });
@@ -112,7 +112,8 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password, role) => {
    
     try {
-   const response = await  fetch("http://localhost:3000/api/auth/login", {
+  // const response = await  fetch("http://localhost:3000/api/auth/login", {
+   const response = await  fetch("https://hannahmedicalapp.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, role }),
@@ -139,12 +140,12 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("role");
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userId");
-        // localStorage.clear();
+    
         showToast(data.message, "error");
         return
     }
   } catch (error) {
-    console.error("Login request failed:", err);
+    console.error("Login request failed:", error);
      setErrorMessage("Login failed. Please try again.");
   }
 }
