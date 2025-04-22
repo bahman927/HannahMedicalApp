@@ -18,7 +18,7 @@ const AppointmentsPage = () => {
     // }
     
     try {
-      const response = await fetch(`http://localhost:3000/api/appointments/fetch?userId=${userId}`, {
+      const response = await fetch(`https://hannahmedicalapi.onrender.com/api/appointments/fetch?userId=${userId}`, {
         credentials: "include",
       });
     
@@ -43,7 +43,7 @@ const AppointmentsPage = () => {
 //******************************************************************************** */
   const fetchAllAppointments = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/appointments/search-appointments`, {
+      const response = await fetch(`https://hannahmedicalapi.onrender.com/api/appointments/search-appointments`, {
         credentials: "include",
       });
     
@@ -79,7 +79,7 @@ const AppointmentsPage = () => {
   
   const cancelAppointment = async (appointmentId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/appointments/cancel/${appointmentId}`, {
+      const response = await fetch(`https://hannahmedicalapi.onrender.com/api/appointments/cancel/${appointmentId}`, {
         method: "PATCH", // Use PATCH to update status to 'cancelled'
         credentials: "include",
       });

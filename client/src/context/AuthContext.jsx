@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("https://hannahmedicalapp-1.onrender.com/api/auth/check", {
+      const response = await fetch("https://hannahmedicalapp.onrender.com/api/auth/check", {
         method:"GET",
         credentials: "include", // Sends HttpOnly cookie
       });

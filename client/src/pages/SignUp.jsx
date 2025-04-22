@@ -15,7 +15,7 @@ export default function SignUp() {
   async function handleSignUp(e) {
     e.preventDefault() 
    try { 
-    const response = await fetch('http://localhost:3000/api/auth/signUp', {
+    const response = await fetch('https://hannahmedicalapi.onrender.com/api/auth/signUp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, password }),
