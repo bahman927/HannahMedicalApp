@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/doctors", {
+      const response = await fetch("https://hannahmedicalapi.onrender.com/api/doctors", {
         credentials: "include",
       });
       if (!response.ok) throw new Error("Failed to fetch doctor data");
@@ -41,17 +41,6 @@ const AdminDashboard = () => {
     }
   }, [name]);
 
-  // const handleDeleteDoctor = async (doctorId) => {
-  //   const response = await fetch(`http://localhost:3000/api/doctors/${doctorId}`, {
-  //     method: "DELETE",
-  //     credentials: "include",
-  //   });
-  //   if (response.ok) {
-  //     setDoctors(doctors.filter(doctor => doctor._id !== doctorId));
-  //   } else {
-  //     alert("Failed to delete doctor.");
-  //   }
-  // };
 
   const handleEditDoctor = (doctorId) => {
     navigate(`/edit-doctor/${doctorId}`);

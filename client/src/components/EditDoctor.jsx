@@ -17,7 +17,7 @@ const EditDoctor = () => {
 
   useEffect(() => {
     const fetchDoctor = async () => {
-      const response = await fetch(`http://localhost:3000/api/doctors/${doctorId}`, {
+      const response = await fetch(`https://hannahmedicalapi.onrender.com/api/doctors/${doctorId}`, {
        credentials: "include",
       });
 
@@ -39,7 +39,7 @@ const EditDoctor = () => {
   const handleUpdateDoctor = async (e) => {
     e.preventDefault();
     
-    const response = await fetch(`http://localhost:3000/api/doctors/${doctorId}`, {
+    const response = await fetch(`https://hannahmedicalapi.onrender.com/api/doctors/${doctorId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",

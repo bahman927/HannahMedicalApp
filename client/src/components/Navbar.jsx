@@ -11,7 +11,7 @@ const Navbar = () => {
    
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/logout", {
+      const response = await fetch("https://hannahmedicalapi.onrender.com/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

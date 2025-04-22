@@ -37,7 +37,7 @@ const AddDoctor = () => {
     e.preventDefault();
     console.log("doctor : ", doctor)
     try {
-      const response = await fetch("http://localhost:3000/api/doctors", {
+      const response = await fetch("https://hannahmedicalapi.onrender.com/api/doctors", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
