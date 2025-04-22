@@ -22,14 +22,14 @@ const myAppointment = () => {
 
     // Fetch user's posts
     axios
-    .get(`https://hannahmedicalapi.onrender.com/api/user/posts`, { withCredentials: true})
+    .get(`https://www-promedicalclinic-com.onrender.com/api/user/posts`, { withCredentials: true})
     .then((res) => setPosts(res.data.posts))
     .catch((error) => console.error("Error fetching posts:", error.response?.data || error.message));
 }, [name, navigate]);
 
 const handleDeletePost = (postId) => {
   axios
-    .delete(`https://hannahmedicalapi.onrender.com/api/user/posts/${postId}`, { withCredentials: true })
+    .delete(`https://www-promedicalclinic-com.onrender.com/api/user/posts/${postId}`, { withCredentials: true })
     .then(() => {
       alert("Appointment deleted successfully");
       setPosts(posts.filter((post) => post._id !== postId)); // Update UI

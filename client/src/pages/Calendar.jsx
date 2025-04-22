@@ -246,7 +246,7 @@ const isDayBooked = (day) => {
   };
 
   const bookAppointment = async (userId, doctorId, formattedDate, time) => {
-    const API_URL = "https://hannahmedicalapi.onrender.com/api/appointments/book";
+    const API_URL = "https://www-promedicalclinic-com.onrender.com/api/appointments/book";
   
     if (!userId || !doctorId || !formattedDate || !time) {
       console.error("Missing required parameters:", { userId, doctorId, formattedDate, time });
