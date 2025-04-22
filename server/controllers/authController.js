@@ -70,15 +70,15 @@ export const login = async (req, res) => {
     
      res.cookie("accessToken", newAccessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax"
+      secure: true,
+      sameSite: "none"
     
        });
 
     // res.cookie("refreshToken", refreshToken, {
     //   httpOnly: true,
     //   secure: true,
-    //   sameSite: "strict",
+    //   sameSite: "none",
     //   maxAge: 7 * 24 * 60 * 1000,
     // });
     
@@ -107,7 +107,7 @@ export const refreshToken = async (req, res) => {
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
         secure: true,
-        sameSite: "lax",
+        sameSite: "none",
       });
 
       res.json({ message: "accessToken refreshed" });
