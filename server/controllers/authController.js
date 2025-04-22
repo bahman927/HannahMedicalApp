@@ -82,6 +82,7 @@ export const login = async (req, res) => {
     //   maxAge: 7 * 24 * 60 * 1000,
     // });
     
+    console.log("✅ Sending login response with user data");
 
     res.json({ message: "Login successful", name: user.name, userId:user._id, role: user.role } );
   } catch (error) {

@@ -15,9 +15,9 @@ dotenv.config()
 app.use(express.json());
 //app.use(express.urlencoded({ extended: true })); 
 
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5000"
+//const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5000"
 app.use(cors({
-  origin: "http://localhost:5000", // React frontend URL
+  origin: true, // React frontend URL
   credentials: true // REQUIRED for cookies to be sent
   
 }));
