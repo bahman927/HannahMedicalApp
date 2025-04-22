@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("https://hannahmedicalapp.onrender.com/api/auth/check", {
+      const response = await fetch("https://www-promedicalclinic-com.onrender.com/api/auth/check", {
         method:"GET",
         credentials: "include", // Sends HttpOnly cookie
       });
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
    
     try {
   // const response = await  fetch("http://localhost:3000/api/auth/login", {
-   const response = await  fetch("https://hannahmedicalapp.onrender.com/api/auth/login", {
+   const response = await  fetch("https://www-promedicalclinic-com.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, role }),

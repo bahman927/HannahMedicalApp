@@ -10,16 +10,17 @@ import mongoose          from 'mongoose'
 import appointmentRoutes from './routes/appointmentRoutes.js'
 
 const app = express();
-app.use(cookieParser())
+
 dotenv.config()
-app.use(express.json());
+
 //app.use(express.urlencoded({ extended: true })); 
 
 app.use(cors({
   origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
   credentials: true, 
 }));
-
+app.use(express.json());
+app.use(cookieParser())
 app.get('/test', (req, res)=>{
   res.json('test ok')
 }) 
