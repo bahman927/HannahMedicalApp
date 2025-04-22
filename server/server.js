@@ -15,11 +15,9 @@ dotenv.config()
 app.use(express.json());
 //app.use(express.urlencoded({ extended: true })); 
 
-//const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5000"
 app.use(cors({
-  origin: true, // React frontend URL
-  credentials: true // REQUIRED for cookies to be sent
-  
+  origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
+  credentials: true, 
 }));
 
 app.get('/test', (req, res)=>{
