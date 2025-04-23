@@ -50,16 +50,13 @@ const SearchPatients = () => {
                    setBookedDays(updatedState)
                    localStorage.setItem(`bookedDays_${doctorName}`, JSON.stringify(updatedState));
                    
-                 
-
                    const updatedSearchResults = searchResults.filter(
                     (result) => !(result.doctor === doctorName && result.date === date && result.timeSlot === timeSlot)
                   );
                   setSearchResults(updatedSearchResults);
                   setSearchSubmitted(false)
                   setSearchQuery('')
-                  
-                  
+                             
      }
                 
     const handleInputChange = (e) => {
@@ -143,7 +140,7 @@ const SearchPatients = () => {
               <strong>Patient:</strong> {result.patient.name } {result.patient.familyName} <br />
               <button
                 onClick={() => handleCancelAppointment(result.doctor, result.date, result.timeSlot)} 
-                className="mt-2 text-base rounded-full  bg-cyan-100 w-44">
+                className="mt-2 text-base rounded-full bg-cyan-100 w-44">
                 Cancel Appointmant
               </button>
               
@@ -161,48 +158,4 @@ const SearchPatients = () => {
 }
 export default SearchPatients;
 
- 
-// const handleSearch = () => {
-//   let results = [];
   
-//   for (let i = 0; i < localStorage.length; i++) {
-//     // const key = localStorage.key(i);
-
-//    // Check if the key belongs to a doctor's booked days (assuming the pattern `bookedDays_DoctorName`)
-//     // if (key.startsWith('bookedDays_')) {
-//     //   const doctorName = key.replace('bookedDays_', ''); // Extract doctor's name
-//     //   const doctorPatients = JSON.parse(localStorage.getItem(key)) || {};
-  
-//       doctors.forEach(doctor => {
-//         const doctorPatients = JSON.parse(localStorage.getItem(`bookedDays_${doctor}`)) || {};
-//         Object.keys(doctorPatients).forEach(doctor => {
-//           console.log('doctor = ', doctor)
-//           Object.keys(doctorPatients[year]).forEach(year => {
-//             console.log('year= ', year)
-//             Object.keys(doctorPatients[year][month]).forEach(day => {
-//                 dayBookings = doctorPatients[year][month][day];
-//                 console.log('day = ', day)
-//               Object.keys(dayBookings).forEach((dayKey) => {
-//                 const bookingsArray = dayBookings[dayKey];
-                
-//                 if (Array.isArray(bookingsArray)) { 
-//                    console.log('bookingsArray = ', bookingsArray)
-//                   bookingsArray.forEach(slot =>{
-//                     if (slot.patient && 
-//                       (slot.patient.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-//                       slot.patient.familyName.toLowerCase().includes(searchQuery.toLowerCase())) 
-//                     ){
-//                       results.push({
-//                         doctor,
-//                         date: `${day}/${month}/${year}`,
-//                         slot,
-//                       });
-//                      }
-//                   });
-//                 }
-
-//               });
-//             });
-//           })
-//         })
-//       })

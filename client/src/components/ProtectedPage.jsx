@@ -8,7 +8,7 @@ export default function ProtectedPage() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const data = await fetchWithAuth('https://hannahmedicalapi.onrender.com/posts');
+        const data = await fetchWithAuth('https://www-promedicalclinic-com.onrender.com/posts');
         setPosts(data);
       } catch (err) {
         console.error(err.message);

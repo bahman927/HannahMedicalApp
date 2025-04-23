@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
     try {
-      const response = await fetch("https://hannahmedicalapi.onrender.com/api/doctors", {
+      const response = await fetch("https://www-promedicalclinic-com.onrender.com/api/doctors", {
         credentials: "include",
       });
       if (!response.ok) throw new Error("Failed to fetch doctor data");
