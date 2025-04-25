@@ -176,13 +176,17 @@ export const AuthProvider = ({ children }) => {
       console.error("Logout failed:", error);
     }
   };
-
+  useEffect(() => {
+    showToast("Testing Toast", "success");
+  }, []);
+  
   const showToast = (message, type = "info") => {
     setToast({ message, type } );
     setTimeout(() => { setToast(null) }, 7000); 
-    navigate("/")
+   // navigate("/")
   };
-  
+  console.log("TOAST STATE:", toast);
+
   return (
    <AuthContext.Provider value={{ name, setName, userId, role, setRole, setDrAppointment, doctors ,login ,logout, checkAuth, showToast, isLoggedIn, setIsLoggedIn,userId, setUserId, docId, setDocId, errorMessage, setErrorMessage}}>
     

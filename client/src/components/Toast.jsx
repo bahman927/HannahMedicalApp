@@ -8,7 +8,7 @@ const Toast = ({ message, type = "info" }) => {
     const timer = setTimeout(() => {
       setVisible(false);
       
-    }, 7000); // Auto-hide after 5 seconds
+    }, 5000); // Auto-hide after 5 seconds
 
     return () => clearTimeout(timer);
   }, []);
