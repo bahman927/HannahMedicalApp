@@ -51,20 +51,30 @@ export const AuthProvider = ({ children }) => {
           localStorage.removeItem("userId");
           localStorage.removeItem("role");
           setName(null); 
+          setUserId(null)
+          setRole(null)
+          setIsLoggedIn(false)
           return;
         }
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("name");
         localStorage.removeItem("userId");
         localStorage.removeItem("role");
-
-       // localStorage.clear()
         setName(null);
+        setUserId(null)
+        setRole(null)
+        setIsLoggedIn(false)
       }
     } catch (error) {
       console.error("Auth check failed", error);
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("name");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("role");
+      setName(null)
+      setUserId(null)
+      setRole(null)
+      setIsLoggedIn(false)
     }
   };
 
@@ -87,7 +97,7 @@ export const AuthProvider = ({ children }) => {
     
     const resetTimer = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(handleIdle,  7 * 60 * 1000); // 3 min timeout
+      timeoutRef.current = setTimeout(handleIdle,  7 * 60 * 1000); // 7 min timeout
     };
 
     const events = ["mousemove", "keydown", "mousedown", "touchstart", "scroll", "click"];
@@ -102,7 +112,6 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("role");
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userId");
-      //localStorage.clear()
     };
   }, [isLoggedIn]); // Run effect when user logs in
 
@@ -137,14 +146,12 @@ export const AuthProvider = ({ children }) => {
        localStorage.setItem("role", data.role);
        localStorage.setItem("isLoggedIn", "true");
        localStorage.setItem("userId", data.userId);
-
-       if (data.role === 'doctor') navigate('/appointmentList')
+       if (data.role === 'doctor') navigate('/appointmentList');
       } else {
         localStorage.removeItem("name");
         localStorage.removeItem("role");
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userId");
-    
         showToast(data.message, "error");
         return
     }
@@ -164,7 +171,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("role");
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userId");
-      // localStorage.clear();
       navigate('/')
     } catch (error) {
       console.error("Logout failed:", error);
@@ -173,7 +179,7 @@ export const AuthProvider = ({ children }) => {
 
   const showToast = (message, type = "info") => {
     setToast({ message, type } );
-    setTimeout(() => { setToast(null) }, 5000); 
+    setTimeout(() => { setToast(null) }, 7000); 
     navigate("/")
   };
   
