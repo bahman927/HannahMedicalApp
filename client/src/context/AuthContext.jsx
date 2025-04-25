@@ -148,6 +148,7 @@ export const AuthProvider = ({ children }) => {
        localStorage.setItem("userId", data.userId);
        if (data.role === 'doctor') navigate('/appointmentList');
       } else {
+        console.log("else in autContex login hit")
         localStorage.removeItem("name");
         localStorage.removeItem("role");
         localStorage.removeItem("isLoggedIn");
@@ -182,8 +183,8 @@ export const AuthProvider = ({ children }) => {
   
   const showToast = (message, type = "info") => {
     setToast({ message, type } );
-    setTimeout(() => { setToast(null) }, 7000); 
-   // navigate("/")
+    setTimeout(() => { setToast(null) }, 5000); 
+    navigate("/")
   };
   console.log("TOAST STATE:", toast);
 
