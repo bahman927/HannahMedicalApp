@@ -14,7 +14,7 @@ const app = express();
 dotenv.config()
 
 //app.use(express.urlencoded({ extended: true })); 
-app.use(cors());
+//app.use(cors());
 
 // app.use(cors({
 //   origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
