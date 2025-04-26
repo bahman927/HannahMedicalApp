@@ -14,11 +14,12 @@ const app = express();
 dotenv.config()
 
 //app.use(express.urlencoded({ extended: true })); 
+app.use(cors());
 
-app.use(cors({
-  origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
-  credentials: true, 
-}));
+// app.use(cors({
+//   origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
+//   credentials: true, 
+// }));
 app.use(express.json());
 app.use(cookieParser())
 app.get('/test', (req, res)=>{
