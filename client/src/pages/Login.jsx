@@ -12,7 +12,7 @@ const Login = () => {
    const submitHandler = async (e) => {
       e.preventDefault()
      //    console.log('email = ', email, 'password = ', password, ' role : ', role)  
-      if (!email || !password, !role) {
+      if (!email || !password || !role) {
         showToast("Please enter email and password and role.", "warning")
         return;
       }

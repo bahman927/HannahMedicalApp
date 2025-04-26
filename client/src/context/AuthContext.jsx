@@ -117,50 +117,97 @@ export const AuthProvider = ({ children }) => {
 
 //************************************************************************** */
   // 🔹 Login function
-//************************************************************************** */  
-  const login = async (email, password, role) => {
-   
-    try {
-  // const response = await  fetch("http://localhost:3000/api/auth/login", {
-   const response = await  fetch("https://www-promedicalclinic-com.onrender.com/api/auth/login", {
+//************************************************************************** 
+const login = async (email, password, role) => {
+  try {
+    const response = await fetch("https://www-promedicalclinic-com.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, role }),
       credentials: "include",
     });
+
+    let data;
+
+    // Try to parse the JSON even if the response is not ok
+    try {
+      data = await response.json();
+    } catch {
+      data = { message: "Invalid server response" };
+    }
+
     if (!response.ok) {
-      const text = await response.text(); // for debug/logging
-      throw new Error(`Login failed: ${text}`);
+      showToast(data.message || "Login failed", "error");
+      throw new Error(data.message || "Login failed");
     }
-   const data = await response.json();
-  // console.log("Login in AuthContext : ", data);
-    
-    if (response.ok) {
-     // console.log(" login data in authContext  = ", data);
-       setIsLoggedIn(true)
-       setName(data.name);
-       setUserId(data.userId)
-       setRole(data.role)
-       setErrorMessage(null)
-       localStorage.setItem("name", data.name);
-       localStorage.setItem("role", data.role);
-       localStorage.setItem("isLoggedIn", "true");
-       localStorage.setItem("userId", data.userId);
-       if (data.role === 'doctor') navigate('/appointmentList');
-      } else {
-        console.log("else in autContex login hit")
-        localStorage.removeItem("name");
-        localStorage.removeItem("role");
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("userId");
-        showToast(data.message, "error");
-        return
+
+    // Handle successful login
+    setIsLoggedIn(true);
+    setName(data.name);
+    setUserId(data.userId);
+    setRole(data.role);
+    setErrorMessage(null);
+
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("role", data.role);
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userId", data.userId);
+
+    if (data.role === 'doctor') {
+      navigate('/appointmentList');
     }
+
   } catch (error) {
     console.error("Login request failed:", error);
-     setErrorMessage("Login failed. Please try again.");
+    setErrorMessage("Login failed. Please try again.");
+    showToast(error.message || "Login failed. Please try again.", "error");
   }
-}
+};
+
+// */  
+//   const login = async (email, password, role) => {
+   
+//     try {
+//   // const response = await  fetch("http://localhost:3000/api/auth/login", {
+//    const response = await  fetch("https://www-promedicalclinic-com.onrender.com/api/auth/login", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ email, password, role }),
+//       credentials: "include",
+//     });
+//     if (!response.ok) {
+//       const text = await response.text(); // for debug/logging
+//       throw new Error(`Login failed: ${text}`);
+//     }
+//    const data = await response.json();
+//    console.log("Login in AuthContext : ", data);
+    
+//     if (response.ok) {
+//      // console.log(" login data in authContext  = ", data);
+//        setIsLoggedIn(true)
+//        setName(data.name);
+//        setUserId(data.userId)
+//        setRole(data.role)
+//        setErrorMessage(null)
+//        localStorage.setItem("name", data.name);
+//        localStorage.setItem("role", data.role);
+//        localStorage.setItem("isLoggedIn", "true");
+//        localStorage.setItem("userId", data.userId);
+//        if (data.role === 'doctor') navigate('/appointmentList');
+//       } else {
+//         console.log("else in autContex login hit")
+//         localStorage.removeItem("name");
+//         localStorage.removeItem("role");
+//         localStorage.removeItem("isLoggedIn");
+//         localStorage.removeItem("userId");
+//         showToast(data.message, "error");
+//         return
+//     }
+//   } catch (error) {
+//     console.error("Login request failed:", error);
+//      setErrorMessage("Login failed. Please try again.");
+//   }
+// }
 
   const logout = async () => {
     try {
