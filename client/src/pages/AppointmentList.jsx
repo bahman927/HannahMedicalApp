@@ -173,7 +173,9 @@ const fetchUserAppointments = async () => {
       {loading ? (
         
         <div className="flex items-center justify-center h-40">
-         <div className="w-8 h-8 border-4 border-blue-500 border-dotted rounded-full animate-spin"></div>
+         <div className="w-8 h-8 border-4 border-blue-500 border-dotted rounded-full animate-spin">
+         <p className="mt-2 text-sm text-gray-500">Loading appointments...</p>
+         </div>
         </div>
         /* <div className="flex items-center justify-center h-40">
           <div className="flex items-center space-x-2">
