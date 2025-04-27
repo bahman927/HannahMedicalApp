@@ -68,7 +68,6 @@ const AdminDashboard = () => {
           alt={doctor.name} 
           className="doctor-image"
         /></td>
-             
               <td>{doctor.name}</td>
               <td>{doctor.speciality}</td>
               <td>{doctor.experience}</td>
