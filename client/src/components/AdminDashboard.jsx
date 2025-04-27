@@ -53,7 +53,6 @@ const AdminDashboard = () => {
         <thead>
           <tr>
             <th> </th>
-          //  <th> Doctor Id</th>
             <th> Name</th>
             <th>Specialization</th>
             <th> Years experience</th>
@@ -69,7 +68,7 @@ const AdminDashboard = () => {
           alt={doctor.name} 
           className="doctor-image"
         /></td>
-             // <td>{doctor.docId}</td>
+             
               <td>{doctor.name}</td>
               <td>{doctor.speciality}</td>
               <td>{doctor.experience}</td>
