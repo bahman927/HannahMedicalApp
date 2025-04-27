@@ -58,15 +58,7 @@ const EditDoctor = () => {
     <div className="edit-doctor">
       <h2>Edit Doctor</h2>
       <form onSubmit={handleUpdateDoctor}>
-        {/* <div>
-          <label>Doctor ID:</label>
-          <input
-            type="text"
-            name="docId"
-            value={doctor.docId || ""}
-            onChange={handleInputChange}
-          />
-        </div> */}
+         
         <div>
           <label>Name:</label>
           <input
