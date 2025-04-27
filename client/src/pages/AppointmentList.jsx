@@ -12,34 +12,95 @@ const AppointmentsPage = () => {
   
   //console.log("userId in AppointmentList :", userId, "role :", role)
 //***************************************************************************** */
-  const fetchUserAppointments = async () => {
-    // if (!isLoggedIn) {
-    //     showToast("Please Login or sign up first ", "warning")
-    // }
-    
+const fetchUserAppointments = async () => {
+  const MAX_RETRIES = 2;
+  let attempt = 0;
+
+  while (attempt <= MAX_RETRIES) {
     try {
-      const response = await fetch(`https://www-promedicalclinic-com.onrender.com/api/appointments/fetch?userId=${userId}`, {
-        credentials: "include",
-      });
-    
-       const res = await response.json();
-      
-      if (response.status === 200) {
-        setAppointments(res.appointments);
-        console.log('res in fetchUserAppointment : ', res.appointments)
-        console.log('appointments in fetchUserAppointment : ', appointments)
-      } else {
-          console.error("API Error Response:", res);
-          return { error: data.message || "Failed to list appointment" };
+      if (!userId) {
+        console.warn("User ID is missing. Cannot fetch appointments.");
+        showToast("Please login first.", "warning");
+        return { error: "User ID not available" };
       }
+
+      const response = await fetch(`https://www-promedicalclinic-com.onrender.com/api/appointments/fetch?userId=${userId}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const message = errorData.message || `Server responded with ${response.status}`;
+        console.error("Fetch error:", message);
+        showToast(message, "error");
+        return { error: message };
+      }
+
+      const res = await response.json();
+
+      if (!res || !Array.isArray(res.appointments)) {
+        console.error("Invalid response structure:", res);
+        showToast("Invalid data received from server.", "error");
+        return { error: "Invalid appointment data" };
+      }
+
+      setAppointments(res.appointments);
+      console.log("Fetched appointments:", res.appointments);
+
+      if (res.appointments.length === 0) {
+        showToast("No appointments found.", "info");
+      }
+
+      return res.appointments; // Success, exit the loop!
+
+    } catch (error) {
+      console.error(`Attempt ${attempt + 1} failed:`, error);
+      attempt++;
+
+      if (attempt > MAX_RETRIES) {
+        showToast("Failed to fetch appointments. Please check your internet and try again.", "error");
+        return { error: "Network error after retries" };
+      }
+
+      // Wait a bit before retrying (especially important for mobile slow recovery)
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+    }
+  }
+};
+
+  // const fetchUserAppointments = async () => {
+  //   // if (!isLoggedIn) {
+  //   //     showToast("Please Login or sign up first ", "warning")
+  //   // }
+    
+  //   try {
+  //     const response = await fetch(`https://www-promedicalclinic-com.onrender.com/api/appointments/fetch?userId=${userId}`, {
+  //       credentials: "include",
+  //     });
+    
+  //      const res = await response.json();
+      
+  //     if (response.status === 200) {
+  //       setAppointments(res.appointments);
+  //       console.log('res in fetchUserAppointment : ', res.appointments)
+  //       console.log('appointments in fetchUserAppointment : ', appointments)
+  //     } else {
+  //         console.error("API Error Response:", res);
+  //         return { error: data.message || "Failed to list appointment" };
+  //     }
       
         
       
-    } catch (error) {
-      console.error("Error booking appointment:", error);
-    return { error: "Failed to book appointment. Please try again later." };
-    }
-  };
+  //   } catch (error) {
+  //     console.error("Error booking appointment:", error);
+  //   return { error: "Failed to book appointment. Please try again later." };
+  //   }
+  // };
 //******************************************************************************** */
   const fetchAllAppointments = async () => {
     try {
