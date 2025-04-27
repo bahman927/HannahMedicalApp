@@ -64,10 +64,10 @@ const AdminDashboard = () => {
           {doctors.map((doctor) => (
             <tr key={doctor._id}>
               <td> <img 
-          src={doctor.image || "/default-doctor.png"}  
-          alt={doctor.name} 
-          className="doctor-image"
-        /></td>
+                   src={doctor.image || "/default-doctor.png"}  
+                   alt={doctor.name} 
+                   className="doctor-image"/>
+              </td>
               <td>{doctor.name}</td>
               <td>{doctor.speciality}</td>
               <td>{doctor.experience}</td>
