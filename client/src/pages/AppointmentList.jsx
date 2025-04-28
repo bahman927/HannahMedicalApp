@@ -16,7 +16,7 @@ const fetchUserAppointments = async () => {
   const MAX_RETRIES = 2;
   let attempt = 0;
 
-  while (attempt <= MAX_RETRIES) {
+  //while (attempt <= MAX_RETRIES) {
     try {
       if (!userId) {
         console.warn("User ID is missing. Cannot fetch appointments.");
@@ -65,15 +65,15 @@ const fetchUserAppointments = async () => {
       console.error(`Attempt ${attempt + 1} failed:`, error);
       attempt++;
 
-      if (attempt > MAX_RETRIES) {
-        showToast("Failed to fetch appointments. Please check your internet and try again.", "error");
-        return { error: "Network error after retries" };
-      }
+      // if (attempt > MAX_RETRIES) {
+      //   showToast("Failed to fetch appointments. Please check your internet and try again.", "error");
+      //   return { error: "Network error after retries" };
+      // }
 
       // Wait a bit before retrying (especially important for mobile slow recovery)
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+     // await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
     }
-  }
+  //}
 };
 
   // const fetchUserAppointments = async () => {
