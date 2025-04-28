@@ -15,11 +15,20 @@ dotenv.config()
 
 app.use(express.urlencoded({ extended: true })); 
 
+// --- use this exact CORS config ---
+const allowedOrigins = ['https://hannahmedicalapp-1.onrender.com'];
 
 app.use(cors({
-  origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
-  credentials: true, 
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// app.use(cors({
+//   origin: 'https://hannahmedicalapp-1.onrender.com', // <-- Allows frontend origin
+//   credentials: true, 
+// }));
 app.use(express.json());
 app.use(cookieParser())
 app.get('/test', (req, res)=>{
