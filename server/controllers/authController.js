@@ -7,7 +7,7 @@ import Doctor from "../models/doctorSchema.js";
 // Generate Access Token (Short-lived)
 const generateTokens = (userId, role) => {
     const newAccessToken = jwt.sign({ id: userId, role:role }, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "25m",
+      expiresIn: "1d",
     });
 
     // const refreshToken = jwt.sign({ id: userId }, process.env.REFRESH_TOKEN_SECRET, {

@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext} from "react";
 import { useNavigate}  from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
+import Spinner from './components/Spinner';
 import { FaTrash } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa"; // Import a cancel/delete icon
 
@@ -171,12 +172,12 @@ const AppointmentsPage = () => {
       <h2 className="mb-4 text-2xl font-bold">My Appointments</h2>
   
       {loading ? (
-        
-        <div className="flex items-center justify-center h-40">
+         <Spinner />
+        /* <div className="flex items-center justify-center h-40">
          <div className="w-8 h-8 border-4 border-blue-500 border-dotted rounded-full animate-spin">
          <p className="mt-2 text-sm text-gray-500">Loading appointments...</p>
          </div>
-        </div>
+        </div> */
         /* <div className="flex items-center justify-center h-40">
           <div className="flex items-center space-x-2">
             <div className="w-5 h-5 border-4 border-blue-500 rounded-full border-t-transparent animate-spin"></div>
