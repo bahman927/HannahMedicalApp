@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext} from "react";
 import { useNavigate}  from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
-import Spinner from './components/Spinner';
+import Spinner from '../components/Spinner';
 import { FaTrash } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa"; // Import a cancel/delete icon
 
