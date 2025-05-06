@@ -167,6 +167,19 @@ export const doctors = [
       line2: 'parkeircle, Ring Road, London'
     }         
   },
+  {_id:'doc12',
+    name: 'Dr. Amin Hadipour',
+    image: "/images/dr12.jpg",
+    speciality:'Nuerology',
+    degree: 'MBBS',
+    experience:'5 years',
+    about: 'Dr. Ben has Strong commitment to delivering',
+    fees:50,
+    address: {
+      line1: '25th  cross, Richmond',
+      line2: 'parkeircle, Ring Road, London'
+    }         
+  },
    
 ]
 
