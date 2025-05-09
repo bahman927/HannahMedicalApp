@@ -169,7 +169,7 @@ export const doctors = [
   },
   {_id:'doc12',
     name: 'Dr. Amin Hadipour',
-    image: "/images/dr12.jpg",
+    image: "/images/dr12.jpeg",
     speciality:'Neurologist',
     degree: 'MBBS',
     experience:'5 years',
