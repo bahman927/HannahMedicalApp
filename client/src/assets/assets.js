@@ -170,7 +170,7 @@ export const doctors = [
   {_id:'doc12',
     name: 'Dr. Amin Hadipour',
     image: "/images/dr12.jpg",
-    speciality:'Nuerology',
+    speciality:'Neurologist',
     degree: 'MBBS',
     experience:'5 years',
     about: 'Dr. Ben has Strong commitment to delivering',
