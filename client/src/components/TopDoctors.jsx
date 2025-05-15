@@ -20,7 +20,7 @@ const TopDoctors = () => {
               <span className='text-sm text-green-500'>Available</span>
             </div>
             <p className='font-serif text-base break-words cursor-pointer'>{item.name}</p>
-            <p className='mb-3 text-sm break-words cursor-pointer'>{item.speciality}</p>
+            <p className='text-sm break-words whitespace-normal cursor-pointer '>{item.speciality}</p>
           </div> 
         
         ))}
