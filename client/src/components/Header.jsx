@@ -23,7 +23,7 @@ const Header = () => {
                doctors schedule your appintment hassle-free.
             </p>
             <div className='mt-5'>
-              <a href="#speciality" className='gap-2 px-4 py-2 m-auto transition-all duration-300 bg-blue-100 rounded-full hover:scale-105 text-zinc-500 tx-sm md:m-0 hover:bg-white'>
+              <a href="#speciality" className='gap-2 px-4 py-2 m-auto transition-all duration-300 bg-blue-100 rounded-full hover:scale-105 text-zinc-500 text-sm md:m-0 hover:bg-white'>
                 Book Appointment
               </a>
             </div>
